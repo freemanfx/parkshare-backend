@@ -5,6 +5,7 @@ import fii.offer.api.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,6 +18,6 @@ public class OffersService {
     }
 
     public List<OfferDTO> findByBounds(double southWestLatitude, double southWestLongitude, double neLatitude, double neLongitude) {
-        return null;
+        return Collections.emptyList();
     }
 }

@@ -3,14 +3,13 @@ package fii.parking.api;
 
 import fii.parking.Parking;
 import fii.user.User;
-import fii.user.api.UserDTO;
 
 public class ParkingDTO {
     private Long id;
 
     private String name;
 
-    private UserDTO user;
+    private Long userId;
 
     private double latitude;
 
@@ -25,7 +24,7 @@ public class ParkingDTO {
         latitude = parking.getLatitude();
         longitude = parking.getLongitude();
         name = parking.getName();
-        user = new UserDTO(parking.getUser());
+        userId = parking.getUser().getId();
     }
 
     public Long getId() {
@@ -42,14 +41,6 @@ public class ParkingDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
     }
 
     public double getLatitude() {
@@ -70,8 +61,7 @@ public class ParkingDTO {
 
 
     public Parking toEntity() {
-        UserDTO userDTO = getUser();
-        User user = new User(userDTO.getId(), userDTO.getFirstName(), userDTO.getLastName());
+        User user = new User();
 
         Parking parking = new Parking();
         parking.setId(getId());
@@ -80,5 +70,13 @@ public class ParkingDTO {
         parking.setUser(user);
         parking.setName(getName());
         return parking;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

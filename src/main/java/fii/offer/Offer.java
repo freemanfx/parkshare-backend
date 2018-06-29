@@ -14,7 +14,7 @@ public class Offer {
     @ManyToOne
     private Parking parking;
 
-    @OneToOne
+    @Embedded
     private Validity validity;
 
     public Long getId() {

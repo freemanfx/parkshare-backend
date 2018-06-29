@@ -1,7 +1,5 @@
 package fii.user.api;
 
-import fii.user.User;
-
 public class UserDTO {
     private Long id;
 
@@ -10,12 +8,6 @@ public class UserDTO {
     private String lastName;
 
     public UserDTO() {
-    }
-
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
     }
 
     public Long getId() {
