@@ -1,5 +1,6 @@
 package fii.offer.api;
 
+import fii.offer.Offer;
 import fii.offer.OffersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +21,13 @@ public class OffersController {
         return offersService.findByBounds(southWestLatitude, southWestLongitude, neLatitude, neLongitude);
     }
 
+    @GetMapping("/parking/{parkingId}")
+    public List<Offer> getOffersByParkingId(@PathVariable Long parkingId) {
+        return offersService.getByParkingId(parkingId);
+    }
 
-    @PostMapping(value = "/", consumes = "application/json")
+    @PostMapping(consumes = "application/json")
     public void save(@RequestBody OfferDTO offerDTO) {
         offersService.save(offerDTO.toEntity());
     }
-
 }
