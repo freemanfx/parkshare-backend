@@ -14,11 +14,11 @@ public class OffersController {
     private OffersService offersService;
 
     @GetMapping("/bounds/{swLat}/{swLong}/{neLat}/{neLong}")
-    public List<OfferDTO> getOffers(@PathVariable("swLat") double southWestLatitude,
-                                    @PathVariable("swLong") double southWestLongitude,
-                                    @PathVariable("neLat") double neLatitude,
-                                    @PathVariable("neLong") double neLongitude) {
-        return offersService.findByBounds(southWestLatitude, southWestLongitude, neLatitude, neLongitude);
+    public Iterable<Offer> getOffers(@PathVariable("swLat") double southWestLatitude,
+                                     @PathVariable("swLong") double southWestLongitude,
+                                     @PathVariable("neLat") double northEastLatitude,
+                                     @PathVariable("neLong") double northEastLongitude) {
+        return offersService.findByBounds(southWestLatitude, southWestLongitude, northEastLatitude, northEastLongitude);
     }
 
     @GetMapping("/parking/{parkingId}")
