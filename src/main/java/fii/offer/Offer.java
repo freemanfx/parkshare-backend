@@ -1,5 +1,6 @@
 package fii.offer;
 
+import fii.offer.api.Booking;
 import fii.parking.Parking;
 
 import javax.persistence.*;
@@ -16,6 +17,9 @@ public class Offer {
 
     @Embedded
     private Validity validity;
+
+    @Embedded
+    private Booking booking;
 
     public Long getId() {
         return id;
@@ -39,5 +43,13 @@ public class Offer {
 
     public void setValidity(Validity validity) {
         this.validity = validity;
+    }
+
+    public boolean isBooked() {
+        return booking != null;
+    }
+
+    public void markAsBooked(Long userId) {
+        booking = new Booking(userId);
     }
 }

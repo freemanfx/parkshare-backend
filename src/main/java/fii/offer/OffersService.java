@@ -12,12 +12,12 @@ import java.util.Optional;
 
 @Service
 public class OffersService {
+
     @Autowired
     private OfferRepository offerRepository;
     @Autowired
     private ParkingRepository parkingRepository;
 
-    @Transactional
     public void save(Offer offer) {
         offerRepository.save(offer);
     }
@@ -33,6 +33,20 @@ public class OffersService {
             return offerRepository.findOfferByParking(parking.get());
         } else {
             throw new RuntimeException("Parking with id " + parkingId + " could not be found!");
+        }
+    }
+
+    public void bookOffer(Long offerId, Long userId) {
+        Optional<Offer> optional = offerRepository.findById(offerId);
+        if (optional.isPresent()) {
+            Offer offer = optional.get();
+            if (offer.isBooked()) {
+                throw new RuntimeException("Offer is already booked!");
+            }
+
+            offer.markAsBooked(userId);
+
+            offerRepository.save(offer);
         }
     }
 }

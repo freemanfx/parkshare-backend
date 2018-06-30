@@ -10,24 +10,30 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/offers", produces = "application/json")
 public class OffersController {
+
     @Autowired
     private OffersService offersService;
 
+    @PostMapping(consumes = "application/json")
+    public void addOffer(@RequestBody OfferDTO offerDTO) {
+        offersService.save(offerDTO.toEntity());
+    }
+
+    @PostMapping("/book/{offerId}/{userId}")
+    public void bookOffer(@PathVariable("offerId") Long offerId, @PathVariable("userId") Long userId) {
+        offersService.bookOffer(offerId, userId);
+    }
+
     @GetMapping("/bounds/{swLat}/{swLong}/{neLat}/{neLong}")
-    public Iterable<Offer> getOffers(@PathVariable("swLat") double southWestLatitude,
-                                     @PathVariable("swLong") double southWestLongitude,
-                                     @PathVariable("neLat") double northEastLatitude,
-                                     @PathVariable("neLong") double northEastLongitude) {
+    public Iterable<Offer> getOffersByBounds(@PathVariable("swLat") double southWestLatitude,
+                                             @PathVariable("swLong") double southWestLongitude,
+                                             @PathVariable("neLat") double northEastLatitude,
+                                             @PathVariable("neLong") double northEastLongitude) {
         return offersService.findByBounds(southWestLatitude, southWestLongitude, northEastLatitude, northEastLongitude);
     }
 
     @GetMapping("/parking/{parkingId}")
     public List<Offer> getOffersByParkingId(@PathVariable Long parkingId) {
         return offersService.getByParkingId(parkingId);
-    }
-
-    @PostMapping(consumes = "application/json")
-    public void save(@RequestBody OfferDTO offerDTO) {
-        offersService.save(offerDTO.toEntity());
     }
 }
