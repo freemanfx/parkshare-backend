@@ -30,10 +30,10 @@ public class OffersController {
     }
 
     @GetMapping("/bounds/{swLat}/{swLong}/{neLat}/{neLong}")
-    public Iterable<Offer> getOffersByBounds(@PathVariable("swLat") double southWestLatitude,
-                                             @PathVariable("swLong") double southWestLongitude,
-                                             @PathVariable("neLat") double northEastLatitude,
-                                             @PathVariable("neLong") double northEastLongitude) {
+    public List<Offer> getOffersByBounds(@PathVariable("swLat") double southWestLatitude,
+                                         @PathVariable("swLong") double southWestLongitude,
+                                         @PathVariable("neLat") double northEastLatitude,
+                                         @PathVariable("neLong") double northEastLongitude) {
         return offersService.findByBounds(southWestLatitude, southWestLongitude, northEastLatitude, northEastLongitude);
     }
 

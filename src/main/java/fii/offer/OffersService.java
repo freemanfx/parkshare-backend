@@ -21,9 +21,10 @@ public class OffersService {
         offerRepository.save(offer);
     }
 
-    public Iterable<Offer> findByBounds(double southWestLatitude, double southWestLongitude, double neLatitude, double neLongitude) {
+    public List<Offer> findByBounds(double southWestLatitude, double southWestLongitude, double neLatitude, double neLongitude) {
         //TODO: filter by params
-        return offerRepository.findByBounds(southWestLatitude, southWestLongitude, neLatitude, neLongitude);
+        List<Offer> offers = offerRepository.findByBounds(southWestLatitude, southWestLongitude, neLatitude, neLongitude);
+        return offers;
     }
 
     public List<Offer> getByParkingId(Long parkingId) {

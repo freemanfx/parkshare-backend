@@ -11,6 +11,7 @@ public interface OfferRepository extends CrudRepository<Offer, Long> {
     List<Offer> findOfferByParking(Parking parking);
 
     @Query("SELECT o from Offer o WHERE o.booking.userId is NULL" +
+            " AND o.validity.start < CURRENT_TIMESTAMP" +
             " AND o.validity.end > CURRENT_TIMESTAMP" +
             " ORDER by o.validity DESC"
     )
