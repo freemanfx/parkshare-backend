@@ -5,7 +5,6 @@ import fii.parking.Parking;
 import fii.parking.ParkingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +45,15 @@ public class OffersService {
 
             offer.markAsBooked(userId);
 
+            offerRepository.save(offer);
+        }
+    }
+
+    public void unbookOffer(Long offerId) {
+        Optional<Offer> optional = offerRepository.findById(offerId);
+        if (optional.isPresent()) {
+            Offer offer = optional.get();
+            offer.markAsUnbooked();
             offerRepository.save(offer);
         }
     }

@@ -52,4 +52,8 @@ public class Offer {
     public void markAsBooked(Long userId) {
         booking = new Booking(userId);
     }
+
+    public void markAsUnbooked() {
+        booking = null;
+    }
 }

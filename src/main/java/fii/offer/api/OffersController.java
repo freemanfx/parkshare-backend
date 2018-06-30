@@ -24,6 +24,11 @@ public class OffersController {
         offersService.bookOffer(offerId, userId);
     }
 
+    @PostMapping("/unbook/{offerId}")
+    public void bookOffer(@PathVariable("offerId") Long offerId) {
+        offersService.unbookOffer(offerId);
+    }
+
     @GetMapping("/bounds/{swLat}/{swLong}/{neLat}/{neLong}")
     public Iterable<Offer> getOffersByBounds(@PathVariable("swLat") double southWestLatitude,
                                              @PathVariable("swLong") double southWestLongitude,
