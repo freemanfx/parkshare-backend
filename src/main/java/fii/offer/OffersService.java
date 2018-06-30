@@ -24,7 +24,7 @@ public class OffersService {
 
     public Iterable<Offer> findByBounds(double southWestLatitude, double southWestLongitude, double neLatitude, double neLongitude) {
         //TODO: filter by params
-        return offerRepository.findAll();
+        return offerRepository.findByBounds(southWestLatitude, southWestLongitude, neLatitude, neLongitude);
     }
 
     public List<Offer> getByParkingId(Long parkingId) {
