@@ -22,14 +22,9 @@ public class InitDataService {
     public void init() {
         User user = userService.findByUsername("proprietar");
 
-        if (user != null) {
+        if (user == null) {
 
             User proprietar = new User("proprietar", "pass");
-            User sofer = new User("sofer", "pass");
-            User user3 = new User("user3", "pass");
-            userService.save(proprietar);
-            userService.save(sofer);
-            userService.save(user3);
 
             Parking parking1 = new Parking();
             parking1.setName("Piata Victoriei");
@@ -49,9 +44,16 @@ public class InitDataService {
             parking3.setLongitude(26.089702);
             parking3.setUser(proprietar);
 
+            userService.save(proprietar);
             parkingService.save(parking1);
             parkingService.save(parking2);
             parkingService.save(parking3);
+        }
+
+        User sofer = userService.findByUsername("sofer");
+        if (sofer == null) {
+            sofer = new User("sofer", "pass");
+            userService.save(sofer);
         }
     }
 }
