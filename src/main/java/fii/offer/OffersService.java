@@ -29,11 +29,10 @@ public class OffersService {
 
     public List<Offer> getByParkingId(Long parkingId) {
         Optional<Parking> parking = parkingRepository.findById(parkingId);
-        if (parking.isPresent()) {
-            return offerRepository.findOfferByParking(parking.get());
-        } else {
-            throw new RuntimeException("Parking with id " + parkingId + " could not be found!");
-        }
+
+        return parking
+                .map(offerRepository::findOfferByParking)
+                .orElseThrow(() -> new RuntimeException("Parking with id " + parkingId + " could not be found!"));
     }
 
     public void bookOffer(Long offerId, Long userId) {
